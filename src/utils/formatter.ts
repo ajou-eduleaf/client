@@ -6,4 +6,9 @@ function jobFormatter(s: LoginInfo['type']) {
     if (s === 'parents') return '학부모님';
 }
 
-export { jobFormatter };
+function capitalizeFormatter(s: string) {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+
+export { jobFormatter, capitalizeFormatter };

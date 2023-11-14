@@ -8,6 +8,7 @@ import AppRoute from "./config/route";
 import {TEACHER_DUMMY} from "./pages/login-page/config/dummy";
 import LoginPage from "./pages/login-page/LoginPage";
 import MainPage from "./pages/main-page/MainPage";
+import RankPage from "./pages/rank-page/RankPage";
 
 import type {LoginInfo} from "./config/type";
 
@@ -31,6 +32,7 @@ function App() {
             <Routes>
                 <Route path={AppRoute.LOGIN} element={<LoginPage setLogin={setLogin} setLoginInfo={setLoginInfo} />} />
                 <Route path={AppRoute.MAIN} element={<MainPage />} />
+                <Route path={AppRoute.RANK} element={<RankPage />} />
             </Routes>
         </div>
     );
