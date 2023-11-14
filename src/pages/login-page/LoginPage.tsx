@@ -22,7 +22,8 @@ const LoginPage: FC<props> = ({ setLogin }) => {
     
     return (
         <div className={S['container']}>
-            <span className={'mb-4'}>아주대학교 주문서비스 <br/><b className={'bold'}>AJOU ORDER</b> 입니다</span>
+            <span className={'mb-4'}>코딩학원 관리서비스<br/><b className={'bold'}>EduLeaf</b> 입니다</span>
+            <input placeholder={'학원을 입력해주세요.'} />
             <input placeholder={'아이디를 입력해주세요.'} />
             <input placeholder={'비밀번호를 입력해주세요.'} type={'password'} />
             <div className={S['btn-area']}>
