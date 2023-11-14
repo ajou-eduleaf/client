@@ -1,16 +1,19 @@
 import {useNavigate} from "react-router-dom";
 
 
+import {TEACHER_DUMMY} from "./config/dummy";
 import S from './LoginPage.module.css';
 
+import type {LoginInfo} from "../../config/type";
 import type {Dispatch, FC, SetStateAction} from "react";
 
 
 interface props {
     setLogin: Dispatch<SetStateAction<boolean>>;
+    setLoginInfo: Dispatch<SetStateAction<LoginInfo>>;
 }
 
-const LoginPage: FC<props> = ({ setLogin }) => {
+const LoginPage: FC<props> = ({ setLogin, setLoginInfo }) => {
     const navigate = useNavigate();
     
     const handleGotoSignup = () => {
@@ -18,6 +21,7 @@ const LoginPage: FC<props> = ({ setLogin }) => {
     const handleLogin = () => {
         // TODO:: Login
         setLogin(true);
+        setLoginInfo(TEACHER_DUMMY);
     };
     
     return (

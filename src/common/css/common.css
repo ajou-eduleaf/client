@@ -35,6 +35,5 @@
 .mr-4 { margin-right: 16px; }
 
 
-.bold {
-    font-weight: bold;
-}
+.bold { font-weight: bold; }
+.underline { text-decoration: underline; }

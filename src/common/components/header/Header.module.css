@@ -26,3 +26,37 @@
     width: 100%;
     align-items: center;
 }
+
+.menus {
+    display: flex;
+    gap: 64px;
+}
+
+.profile-image {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    margin-left: 16px;
+}
+
+.students-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.parents-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.teacher-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
