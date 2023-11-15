@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  border: none;
 }
 
 body {
@@ -19,6 +20,10 @@ html {
 a {
   text-decoration: none;
   color: black;
+}
+
+button {
+  cursor: pointer;
 }
 
 :root {

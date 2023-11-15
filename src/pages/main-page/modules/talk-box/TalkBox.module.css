@@ -7,13 +7,13 @@
 
 .container img {
     display: inline-block;
-    width: 72px;
-    height: 72px;
+    width: 48px;
+    height: 48px;
     margin-right: 16px;
 }
 
 .wrapper {
-    height: 76px;
+    height: 52px;
     background-color: #f4f4f4;
     padding: 16px;
     border-radius: 16px;

@@ -21,8 +21,7 @@ const ParentsToStudent: FC<NameRequire> = ({ name }) => {
         <div className={S['container']}>
             <img src={`images/parents.png`} />
             <div className={S['wrapper']}>
-                <p className={'bold'}>{`우리 ${nameFormatter(name)}🥰`}</p>
-                <br />
+                <p className={'bold mb-1'}>{`우리 ${nameFormatter(name)}🥰`}</p>
                 <span>우리.{nameFormatter(name)}.멋있다~! 코딩왕이.되는.그날까지~! 엄마가.항상.응원해~~~❤❤❤❤❤</span>
             </div>
         </div>
@@ -34,8 +33,7 @@ const TeacherToStudent: FC<NameRequire> = ({ name }) => {
         <div className={S['container']}>
             <img src={`images/teacher.png`} />
             <div className={S['wrapper']}>
-                <p className={'bold'}>{`${name} 학생🥰`}</p>
-                <br />
+                <p className={'bold mb-1'}>{`${name} 학생🥰`}</p>
                 <span>{nameFormatter(name)} 학생 잘하고 있어요. 오늘도 화이팅!</span>
             </div>
         </div>
@@ -47,8 +45,7 @@ const TeacherToParents: FC<NameRequire> = ({ name }) => {
         <div className={S['container']}>
             <img src={`images/teacher.png`} />
             <div className={S['wrapper']}>
-                <p className={'bold'}>{`${name} 학부모님🙇`}</p>
-                <br />
+                <p className={'bold mb-1'}>{`${name} 학부모님🙇`}</p>
                 <span>자제분 정말 잘하고 있어요! 오늘도 좋은 하루 되세요!</span>
             </div>
         </div>
