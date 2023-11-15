@@ -31,7 +31,7 @@ function App() {
             <Header loginInfo={loginInfo} />
             <Routes>
                 <Route path={AppRoute.LOGIN} element={<LoginPage setLogin={setLogin} setLoginInfo={setLoginInfo} />} />
-                <Route path={AppRoute.MAIN} element={<MainPage />} />
+                <Route path={AppRoute.MAIN} element={<MainPage loginInfo={loginInfo} />} />
                 <Route path={AppRoute.RANK} element={<RankPage />} />
             </Routes>
         </div>

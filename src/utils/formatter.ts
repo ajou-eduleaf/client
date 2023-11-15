@@ -10,5 +10,9 @@ function capitalizeFormatter(s: string) {
     return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
+function nameFormatter(s: string) {
+    return s.slice(1);
+}
 
-export { jobFormatter, capitalizeFormatter };
+
+export { jobFormatter, capitalizeFormatter, nameFormatter };
