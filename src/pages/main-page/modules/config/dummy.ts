@@ -6,14 +6,16 @@ const MAIN_PAGE_DUMMY: MainPageModel = {
         problems: [1,2,3,4,5],
         solved: [1,2,3],
         unsolved: [4,5],
-        isFire: false
+        isFire: false,
+        isAttendance: true,
     },
     '이민서': {
         bojId: 'lms123',
         problems: [1,2,3,4,5],
         solved: [1,2,3],
         unsolved: [4,5],
-        isFire: false
+        isFire: false,
+        isAttendance: false,
     },
 };
 

@@ -58,7 +58,7 @@ const TalkBox: FC<props> = ({ loginInfo }) => {
     const [retEl, setRetEl] = useState(<></>);
     
     useEffect(() => {
-        if (loginInfo.type === 'student') {
+        if (type === 'student') {
             setRetEl(
                 <>
                     <ParentsToStudent name={name} />
@@ -67,11 +67,13 @@ const TalkBox: FC<props> = ({ loginInfo }) => {
             );
         }
     
-        if (loginInfo.type === 'parents') {
+        if (type === 'parents') {
             setRetEl(
                 <TeacherToParents name={name} />
             );
         }
+        
+        if (type === 'teacher') setRetEl(<></>);
     }, [loginInfo]);
     
 	

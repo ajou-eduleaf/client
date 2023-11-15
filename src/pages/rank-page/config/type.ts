@@ -1,5 +1,5 @@
 interface RankPageData {
-	id: string;
+	bojId: string;
 	solved: number;
 }
 

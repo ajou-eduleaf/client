@@ -19,6 +19,7 @@ const MainPage: FC<Props> = ({ loginInfo }) => {
             solved: [0],
             unsolved: [0],
             isFire: false,
+            isAttendance: true
         }
     });
     

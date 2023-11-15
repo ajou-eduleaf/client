@@ -4,7 +4,8 @@ interface MainPageModel {
 		problems: number[],
 		solved: number[],
 		unsolved: number[],
-		isFire: boolean
+		isFire: boolean,
+		isAttendance: boolean,
 	}
 }
 

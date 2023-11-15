@@ -31,7 +31,7 @@ const SelectRank: FC<SelectRankProps> = ({ rankType, selectedRank, setSelectedRa
 
 const RankPage = () => {
     const [selectedRank, setSelectedRank] = useState<RankType>('today');
-    const [rankPageModel, setRankPageModel] = useState<RankPageModel>([{id: '', solved: 0}]);
+    const [rankPageModel, setRankPageModel] = useState<RankPageModel>([{bojId: '', solved: 0}]);
     
     useEffect(() => {
         setRankPageModel(RANK_PAGE_DUMMY);
@@ -61,7 +61,7 @@ const RankPage = () => {
                 {rankPageModel.map((d, i) => (
                     <tr key={i}>
                         <td>{`${i+1}${medalMaker(i+1)}`}</td>
-                        <td>acrobat777</td>
+                        <td>{d.bojId}</td>
                         <td>128</td>
                     </tr>
                 ))}
