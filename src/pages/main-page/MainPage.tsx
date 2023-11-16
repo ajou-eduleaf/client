@@ -5,6 +5,7 @@ import S from "./MainPage.module.css";
 import {MAIN_PAGE_DUMMY} from "./modules/config/dummy";
 import TalkBox from "./modules/talk-box/TalkBox";
 import TodaysProblem from "./modules/todays-problem/TodaysProblem";
+import TodaysState from "./modules/todays-state/TodaysState";
 
 import type {MainPageModel} from "./modules/config/type";
 import type {LoginInfo} from "../../config/type";
@@ -32,6 +33,9 @@ const MainPage: FC<Props> = ({ loginInfo }) => {
             <TalkBox loginInfo={loginInfo} />
             <TodaysProblem loginInfo={loginInfo}
                 problems={model[Object.keys(model)[0]].problems}
+            />
+            <TodaysState loginInfo={loginInfo}
+                states={model}
             />
         </div>
     );
