@@ -1,8 +1,11 @@
 
+import {log} from "util";
+
 import {useEffect, useState} from "react";
 
 import S from "./MainPage.module.css";
 import {MAIN_PAGE_DUMMY} from "./modules/config/dummy";
+import ProgressBar from "./modules/progress-bar/ProgressBar";
 import TalkBox from "./modules/talk-box/TalkBox";
 import TodaysProblem from "./modules/todays-problem/TodaysProblem";
 import TodaysState from "./modules/todays-state/TodaysState";
@@ -36,6 +39,10 @@ const MainPage: FC<Props> = ({ loginInfo }) => {
             />
             <TodaysState loginInfo={loginInfo}
                 states={model}
+            />
+            <ProgressBar loginInfo={loginInfo}
+                solved={model[Object.keys(model)[0]].solved}
+                unsolved={model[Object.keys(model)[0]].unsolved}
             />
         </div>
     );

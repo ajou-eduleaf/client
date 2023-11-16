@@ -53,7 +53,7 @@ const TodaysState: FC<Props> = ({ loginInfo, states }) => {
             {
                 Object.keys(zzStates).map((d, i) => {
                     return (
-                        <div key={i} className={'mb-8'}>
+                        <div key={i} className={'mb-4'}>
                             <div className={S['name-wrapper']}>
                                 <span>{distinctFire(`${d} | ${zzStates[d].bojId}`, zzStates[d].isFire)}</span>
                                 {zzStates[d].isAttendance ? <AttendanceButton /> : <AbsentButton onClick={() => handleAttendance(i)} />}

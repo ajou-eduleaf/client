@@ -1,7 +1,11 @@
+.container {
+    margin-bottom: 32px;
+}
+
 .container h2 {
     font-weight: bold;
     font-size: 24px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
 }
 
 .gray-box {
@@ -53,10 +57,6 @@
 .name-wrapper span {
     font-size: 18px;
     margin-right: 16px;
-}
-
-.name-wrapper button {
-    height: 24px;
 }
 
 .attendance-btn {

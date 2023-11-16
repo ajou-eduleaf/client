@@ -78,7 +78,7 @@ const TalkBox: FC<props> = ({ loginInfo }) => {
     
 	
     return (
-        <div>{retEl}</div>
+        <div className={'mb-8'}>{retEl}</div>
     );
 };
 
