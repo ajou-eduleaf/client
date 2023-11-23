@@ -3,6 +3,7 @@ interface LoginInfo {
 	name: string;
 	type: 'teacher' | 'student' | 'parents';
 	location: string;
+	groupName: string;
 }
 
 export type { LoginInfo };

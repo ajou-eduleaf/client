@@ -1,11 +1,13 @@
 interface MainPageModel {
-	[name: string]: {
-		bojId: string;
+	[id: string]: {
+		name: string,
+		bojId: string,
 		problems: number[],
 		solved: number[],
 		unsolved: number[],
 		isFire: boolean,
 		isAttendance: boolean,
+		groupName: string
 	}
 }
 

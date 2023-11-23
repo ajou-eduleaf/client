@@ -14,7 +14,7 @@ import type {LoginInfo} from "./config/type";
 
 function App() {
     const [login, setLogin] = useState(false);
-    const [loginInfo, setLoginInfo] = useState<LoginInfo>({id: '', name: '', type: 'parents', location: ''});
+    const [loginInfo, setLoginInfo] = useState<LoginInfo>({id: '', name: '', type: 'parents', location: '', groupName: ''});
     const navigate = useNavigate();
     
     useEffect(() => {
