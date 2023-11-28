@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 
+import {fetchData} from "../../utils/api";
 import {capitalizeFormatter} from "../../utils/formatter";
 
 import {RANK_PAGE_DUMMY} from "./config/dummy";
@@ -7,6 +8,7 @@ import {medalMaker} from "./config/util";
 import S from './RankPage.module.css';
 
 import type {RankPageModel, RankType} from "./config/type";
+import type {LoginInfo} from "../../config/type";
 import type {Dispatch, FC, SetStateAction} from "react";
 
 
@@ -29,13 +31,23 @@ const SelectRank: FC<SelectRankProps> = ({ rankType, selectedRank, setSelectedRa
     );
 };
 
-const RankPage = () => {
-    const [selectedRank, setSelectedRank] = useState<RankType>('today');
+
+interface Props { loginInfo: LoginInfo }
+const RankPage: FC<Props> = ({ loginInfo }) => {
+    const [selectedRank, setSelectedRank] = useState<RankType>('month');
     const [rankPageModel, setRankPageModel] = useState<RankPageModel>([{bojId: '', solved: 0}]);
     
     useEffect(() => {
-        setRankPageModel(RANK_PAGE_DUMMY);
-    }, []);
+        try {
+            void (async () => {
+                const res = await fetchData<RankPageModel>(`/rank/show?type=${selectedRank}&location=${loginInfo.location}`, 'GET');
+                setRankPageModel(res);
+            })();
+        } catch (e) {
+            console.error(e);
+        }
+        
+    }, [loginInfo]);
     
     return (
         <div className={S['container']}>

@@ -32,7 +32,7 @@ function App() {
             <Routes>
                 <Route path={AppRoute.LOGIN} element={<LoginPage setLogin={setLogin} setLoginInfo={setLoginInfo} />} />
                 <Route path={AppRoute.MAIN} element={<MainPage loginInfo={loginInfo} />} />
-                <Route path={AppRoute.RANK} element={<RankPage />} />
+                <Route path={AppRoute.RANK} element={<RankPage loginInfo={loginInfo} />} />
             </Routes>
         </div>
     );
