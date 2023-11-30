@@ -38,9 +38,10 @@ const RankPage: FC<Props> = ({ loginInfo }) => {
     const [rankPageModel, setRankPageModel] = useState<RankPageModel>([{bojId: '', solved: 0}]);
     
     useEffect(() => {
+        if (!loginInfo.id) return;
         try {
             void (async () => {
-                const res = await fetchData<RankPageModel>(`/rank/show?type=${selectedRank}&location=${loginInfo.location}`, 'GET');
+                const res = await fetchData<RankPageModel>(`/rank/show?type=${selectedRank}&academyName=${loginInfo.location}`, 'GET');
                 setRankPageModel(res);
             })();
         } catch (e) {

@@ -9,6 +9,7 @@ import {TEACHER_DUMMY} from "./pages/login-page/config/dummy";
 import LoginPage from "./pages/login-page/LoginPage";
 import MainPage from "./pages/main-page/MainPage";
 import RankPage from "./pages/rank-page/RankPage";
+import SignupPage from "./pages/signup-page/SignupPage";
 
 import type {LoginInfo} from "./config/type";
 
@@ -22,8 +23,8 @@ function App() {
     }, [login]);
     
     useEffect(() => {
-        setLogin(true);
-        setLoginInfo(TEACHER_DUMMY);
+        // setLogin(true);
+        // setLoginInfo(TEACHER_DUMMY);
     }, []);
     
     return (
@@ -31,6 +32,7 @@ function App() {
             <Header loginInfo={loginInfo} />
             <Routes>
                 <Route path={AppRoute.LOGIN} element={<LoginPage setLogin={setLogin} setLoginInfo={setLoginInfo} />} />
+                <Route path={AppRoute.SIGNUP} element={<SignupPage />} />
                 <Route path={AppRoute.MAIN} element={<MainPage loginInfo={loginInfo} />} />
                 <Route path={AppRoute.RANK} element={<RankPage loginInfo={loginInfo} />} />
             </Routes>

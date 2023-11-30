@@ -15,6 +15,7 @@ import type {FC} from "react";
 
 interface Props { loginInfo: LoginInfo; }
 const MainPage: FC<Props> = ({ loginInfo }) => {
+    const [lessonId, setLessonId] = useState<string>('');
     const [model, setModel] = useState<MainPageModel>({
         '_': {
             name: '',
@@ -29,17 +30,29 @@ const MainPage: FC<Props> = ({ loginInfo }) => {
     });
     
     useEffect(() => {
-        setModel(MAIN_PAGE_DUMMY);
-    
+        if (!loginInfo.id) return;
         void (async () => {
             try {
-                const response = await fetchData<MainPageModel>('/test?studentID=sangjuntest', 'GET');
-                console.log(response);
-            } catch {
-                alert('요청에 실패하였습니다.');
+                const response = await fetchData<MainPageModel>(`/lessons/${lessonId}/info?type=${loginInfo.type}&id=${loginInfo.id}`, 'GET');
+                setModel(response);
+            } catch (e) {
+                console.error(e);
             }
         })();
-    }, []);
+    }, [loginInfo]);
+    
+    useEffect(() => {
+        if (!loginInfo.id || !lessonId) return;
+        void (async () => {
+            try {
+                const response = await fetchData<MainPageModel>(`/lessons/1/info?type=${loginInfo.type}&id=${loginInfo.id}`, 'GET');
+                // const response = await fetchData<MainPageModel>(`/api/lessons/1/info?type=teacher&id=ajs`, 'GET');
+                setModel(response);
+            } catch (e) {
+                console.error(e);
+            }
+        })();
+    }, [lessonId]);
     
     return (
         <div className={S['container']}>
