@@ -1,4 +1,4 @@
-type FetchMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE'
+type FetchMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE' | 'PUT'
 
 const BASE_API_URL = 'http://localhost:8080/api';
 

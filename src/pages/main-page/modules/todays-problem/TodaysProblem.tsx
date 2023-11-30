@@ -1,4 +1,6 @@
 
+import {fetchData} from "../../../../utils/api";
+
 import S from './TodaysProblem.module.css';
 
 import type {LoginInfo} from "../../../../config/type";
@@ -7,9 +9,10 @@ import type {FC} from "react";
 interface Props {
 	loginInfo: LoginInfo;
     problems: number[];
+    selectedLessonId: number;
 }
 
-const TodaysProblem: FC<Props> = ({ loginInfo, problems }) => {
+const TodaysProblem: FC<Props> = ({ loginInfo, problems, selectedLessonId }) => {
     if (loginInfo.type === 'parents') return <></>;
     
     const handleClickRefresh = () => {
@@ -18,7 +21,14 @@ const TodaysProblem: FC<Props> = ({ loginInfo, problems }) => {
     
     const handleAddProbs = () => {
         const probNumToAdd = Number(prompt("추가할 문제 번호를 입력해주세요."));
-        if (isNaN(probNumToAdd)) alert("유효하지 않은 번호입니다"); return;
+        if (isNaN(probNumToAdd)) {
+            alert("유효하지 않은 번호입니다");
+            return;
+        }
+        
+        void (async () => {
+            await fetchData(`/lessons/${selectedLessonId}/register/problem/${probNumToAdd}`, 'PUT');
+        })();
     };
 	
 	

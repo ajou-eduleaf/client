@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 
 import {BOJ_HOME} from "../../../../common/config";
+import {fetchData} from "../../../../utils/api";
 
 import S from './TodaysState.module.css';
 
@@ -11,6 +12,7 @@ import type {FC, MouseEventHandler} from "react";
 interface Props {
     loginInfo: LoginInfo;
     states: MainPageModel['studentInfo'];
+    selectedLessonId: number;
 }
 
 function distinctFire(s: string, f: boolean) {
@@ -32,7 +34,7 @@ const AbsentButton: FC<AbsentButtonProps> = ({ onClick }) => {
     );
 };
 
-const TodaysState: FC<Props> = ({ loginInfo, states }) => {
+const TodaysState: FC<Props> = ({ loginInfo, states, selectedLessonId }) => {
     const [zzStates, setZzStates] = useState<MainPageModel['studentInfo']>(states);
     
     useEffect(/**/() => {
@@ -41,12 +43,21 @@ const TodaysState: FC<Props> = ({ loginInfo, states }) => {
     
     const handleAttendance = (i: number) => {
         if (loginInfo.type !== 'teacher') return;
-        setZzStates((prev) => {
-            const _prev = { ...prev };
-            // @ts-ignore
-            _prev[Object.keys(prev)[i]].isAttendance = true;
-            return _prev;
-        });
+        
+        void (async () => {
+            try {
+                await fetchData(`/lessons/${selectedLessonId}/attendance/${loginInfo.id}`, 'PATCH');
+    
+                setZzStates((prev) => {
+                    const _prev = { ...prev };
+                    // @ts-ignore
+                    _prev[Object.keys(prev)[i]].isAttendance = true;
+                    return _prev;
+                });
+            } catch (e) {
+                console.error(e);
+            }
+        })();
     };
     
     return (

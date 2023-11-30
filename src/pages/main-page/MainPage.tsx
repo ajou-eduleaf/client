@@ -64,9 +64,11 @@ const MainPage: FC<Props> = ({ loginInfo }) => {
             <TodaysProblem loginInfo={loginInfo}
                 // @ts-ignore
                 problems={model.studentInfo[Object.keys(model[Object.keys(model)[0]])[0]].todayProblems}
+                selectedLessonId={selectedLessonId}
             />
             <TodaysState loginInfo={loginInfo}
                 states={model.studentInfo}
+                selectedLessonId={selectedLessonId}
             />
             <ProgressBar loginInfo={loginInfo}
                 // @ts-ignore
