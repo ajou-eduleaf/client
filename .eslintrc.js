@@ -45,7 +45,15 @@ module.exports = {
             "disallowTypeAnnotations": true, // optional: to disallow type annotations for variables, parameters, etc.
             "fixStyle": "separate-type-imports" // optional: to define how the fix should be applied
         }],
-        'typescript-eslint/ban-ts-comment': 'off',
+        "@typescript-eslint/ban-ts-comment": [
+            "warn",
+            {
+                "ts-ignore": "allow-with-description",
+                "ts-nocheck": true,
+                "ts-check": false,
+                "minimumDescriptionLength": 3
+            }
+        ],
 
         // plugins
         "import/order": ["error", {

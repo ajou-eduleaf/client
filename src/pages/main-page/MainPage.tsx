@@ -1,48 +1,80 @@
-
-import {log} from "util";
-
 import {useEffect, useState} from "react";
 
+import {fetchData} from "../../utils/api";
+
 import S from "./MainPage.module.css";
-import {MAIN_PAGE_DUMMY} from "./modules/config/dummy";
 import ProgressBar from "./modules/progress-bar/ProgressBar";
 import TalkBox from "./modules/talk-box/TalkBox";
 import TodaysProblem from "./modules/todays-problem/TodaysProblem";
 import TodaysState from "./modules/todays-state/TodaysState";
 
-import type {MainPageModel} from "./modules/config/type";
+import type {LessonListModel, MainPageModel} from "./modules/config/type";
 import type {LoginInfo} from "../../config/type";
 import type {FC} from "react";
 
 interface Props { loginInfo: LoginInfo; }
 const MainPage: FC<Props> = ({ loginInfo }) => {
-    const [model, setModel] = useState<MainPageModel>({
+    const [lessonList, setLessonList] = useState<LessonListModel>();
+    const [selectedLessonId, setSelectedLessonId] = useState<number>(0);
+    const [model, setModel] = useState<MainPageModel>({studentInfo :{
         '_': {
+            name: '',
             bojId: '',
-            problems: [0],
-            solved: [0],
-            unsolved: [0],
+            todayProblems: [0],
+            solvedProblems: [0],
+            unsolvedProblems: [0],
             isFire: false,
-            isAttendance: true
+            isAttendance: true,
+            groupName: '',
         }
-    });
+    }});
     
     useEffect(() => {
-        setModel(MAIN_PAGE_DUMMY);
-    }, []);
+        if (!loginInfo.id) return;
+        void (async () => {
+            try {
+                const lessonListResponse = await fetchData<LessonListModel>(`/groups/${loginInfo.groupName}/lessons`, 'GET');
+                setLessonList(lessonListResponse);
+            } catch (e) {
+                console.error(e);
+            }
+        })();
+    }, [loginInfo]);
+    
+    useEffect(() => {
+        setSelectedLessonId(lessonList?.allLessons[0].lessonId ?? 0);
+    }, [lessonList]);
+    
+    useEffect(() => {
+        console.log(selectedLessonId);
+        if (!loginInfo.id || !selectedLessonId) return;
+        void (async () => {
+            try {
+                const response = await fetchData<MainPageModel>(`/lessons/${selectedLessonId}/info?type=${loginInfo.type}&id=${loginInfo.id}`, 'GET');
+                setModel(response);
+            } catch (e) {
+                console.error(e);
+            }
+        })();
+    }, [selectedLessonId]);
     
     return (
         <div className={S['container']}>
             <TalkBox loginInfo={loginInfo} />
             <TodaysProblem loginInfo={loginInfo}
-                problems={model[Object.keys(model)[0]].problems}
+                // @ts-ignore
+                problems={model.studentInfo[Object.keys(model[Object.keys(model)[0]])[0]].todayProblems}
+                selectedLessonId={selectedLessonId}
             />
             <TodaysState loginInfo={loginInfo}
-                states={model}
+                states={model.studentInfo}
+                selectedLessonId={selectedLessonId}
             />
             <ProgressBar loginInfo={loginInfo}
-                solved={model[Object.keys(model)[0]].solved}
-                unsolved={model[Object.keys(model)[0]].unsolved}
+                // @ts-ignore
+                solved={model.studentInfo[Object.keys(model[Object.keys(model)[0]])[0]].solvedProblems}
+                // @ts-ignore
+                unsolved={model.studentInfo[Object.keys(model[Object.keys(model)[0]])[0]].unsolvedProblems}
             />
         </div>
     );

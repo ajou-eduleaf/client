@@ -1,10 +1,11 @@
 import type {LoginInfo} from "../../../config/type";
 
 const TEACHER_DUMMY: LoginInfo = {
-    id: 'mmmm',
-    name: '이민서',
-    type: 'student',
-    location: 'ajou코딩'
+    id: 'sangjun',
+    name: 'psj',
+    type: 'teacher',
+    academyName: 'academy',
+    groupName: '병아리'
 };
 
 export { TEACHER_DUMMY };

@@ -61,7 +61,7 @@ const Logos: FC<LogosProps> = ({ loginInfo }) => (
         <div className={'flex items-center'}>
             <span className={S['title']}>EduLeaf</span>
             <img className={S['logo']} src={'logo.png'} />
-            {loginInfo?.location && <span>@{loginInfo.location}</span>}
+            {loginInfo?.academyName && <span>@{loginInfo.academyName}</span>}
         </div>
     </Link>
 );
