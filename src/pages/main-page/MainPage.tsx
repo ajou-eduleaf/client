@@ -3,19 +3,19 @@ import {useEffect, useState} from "react";
 import {fetchData} from "../../utils/api";
 
 import S from "./MainPage.module.css";
-import {MAIN_PAGE_DUMMY} from "./modules/config/dummy";
 import ProgressBar from "./modules/progress-bar/ProgressBar";
 import TalkBox from "./modules/talk-box/TalkBox";
 import TodaysProblem from "./modules/todays-problem/TodaysProblem";
 import TodaysState from "./modules/todays-state/TodaysState";
 
-import type {MainPageModel} from "./modules/config/type";
+import type {LessonListModel, MainPageModel} from "./modules/config/type";
 import type {LoginInfo} from "../../config/type";
 import type {FC} from "react";
 
 interface Props { loginInfo: LoginInfo; }
 const MainPage: FC<Props> = ({ loginInfo }) => {
-    const [lessonId, setLessonId] = useState<string>('');
+    const [lessonList, setLessonList] = useState<LessonListModel>();
+    const [selectedLessonId, setSelectedLessonId] = useState<number>(0);
     const [model, setModel] = useState<MainPageModel>({
         '_': {
             name: '',
@@ -30,11 +30,13 @@ const MainPage: FC<Props> = ({ loginInfo }) => {
     });
     
     useEffect(() => {
+        console.log(loginInfo.id, selectedLessonId);
         if (!loginInfo.id) return;
         void (async () => {
             try {
-                const response = await fetchData<MainPageModel>(`/lessons/${lessonId}/info?type=${loginInfo.type}&id=${loginInfo.id}`, 'GET');
-                setModel(response);
+                const lessonListResponse = await fetchData<LessonListModel>(`/groups/${loginInfo.groupName}/lessons`, 'GET');
+                setLessonList(lessonListResponse);
+                setSelectedLessonId(lessonList?.allLessons[0].lessonId ?? 0);
             } catch (e) {
                 console.error(e);
             }
@@ -42,17 +44,16 @@ const MainPage: FC<Props> = ({ loginInfo }) => {
     }, [loginInfo]);
     
     useEffect(() => {
-        if (!loginInfo.id || !lessonId) return;
+        if (!loginInfo.id || !selectedLessonId) return;
         void (async () => {
             try {
-                const response = await fetchData<MainPageModel>(`/lessons/1/info?type=${loginInfo.type}&id=${loginInfo.id}`, 'GET');
-                // const response = await fetchData<MainPageModel>(`/api/lessons/1/info?type=teacher&id=ajs`, 'GET');
+                const response = await fetchData<MainPageModel>(`/lessons/${selectedLessonId}/info?type=${loginInfo.type}&id=${loginInfo.id}`, 'GET');
                 setModel(response);
             } catch (e) {
                 console.error(e);
             }
         })();
-    }, [lessonId]);
+    }, [selectedLessonId]);
     
     return (
         <div className={S['container']}>

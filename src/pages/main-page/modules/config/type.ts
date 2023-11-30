@@ -11,4 +11,15 @@ interface MainPageModel {
 	}
 }
 
-export type { MainPageModel };
+interface Lesson {
+	lessonId: number;
+	content: string;
+	date: string;
+}
+
+interface LessonListModel {
+	allLessons: Array<Lesson>;
+	groupName: string;
+}
+
+export type { MainPageModel, Lesson, LessonListModel };

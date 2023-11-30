@@ -41,7 +41,7 @@ const RankPage: FC<Props> = ({ loginInfo }) => {
         if (!loginInfo.id) return;
         try {
             void (async () => {
-                const res = await fetchData<RankPageModel>(`/rank/show?type=${selectedRank}&academyName=${loginInfo.location}`, 'GET');
+                const res = await fetchData<RankPageModel>(`/rank/show?type=${selectedRank}&academyName=${loginInfo.academyName}`, 'GET');
                 setRankPageModel(res);
             })();
         } catch (e) {

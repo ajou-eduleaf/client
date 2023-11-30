@@ -15,7 +15,7 @@ import type {LoginInfo} from "./config/type";
 
 function App() {
     const [login, setLogin] = useState(false);
-    const [loginInfo, setLoginInfo] = useState<LoginInfo>({id: '', name: '', type: 'parents', location: '', groupName: ''});
+    const [loginInfo, setLoginInfo] = useState<LoginInfo>({id: '', name: '', type: 'parents', academyName: '', groupName: ''});
     const navigate = useNavigate();
     
     useEffect(() => {
@@ -23,8 +23,8 @@ function App() {
     }, [login]);
     
     useEffect(() => {
-        // setLogin(true);
-        // setLoginInfo(TEACHER_DUMMY);
+        setLogin(true);
+        setLoginInfo(TEACHER_DUMMY);
     }, []);
     
     return (

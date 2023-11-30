@@ -2,7 +2,7 @@ interface LoginInfo {
 	id: string;
 	name: string;
 	type: 'teacher' | 'student' | 'parents';
-	location: string;
+	academyName: string;
 	groupName: string;
 }
 
