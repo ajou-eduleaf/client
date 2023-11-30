@@ -16,27 +16,25 @@ interface Props { loginInfo: LoginInfo; }
 const MainPage: FC<Props> = ({ loginInfo }) => {
     const [lessonList, setLessonList] = useState<LessonListModel>();
     const [selectedLessonId, setSelectedLessonId] = useState<number>(0);
-    const [model, setModel] = useState<MainPageModel>({
+    const [model, setModel] = useState<MainPageModel>({studentInfo :{
         '_': {
             name: '',
             bojId: '',
-            problems: [0],
-            solved: [0],
-            unsolved: [0],
+            todayProblems: [0],
+            solvedProblems: [0],
+            unsolvedProblems: [0],
             isFire: false,
             isAttendance: true,
             groupName: '',
         }
-    });
+    }});
     
     useEffect(() => {
-        console.log(loginInfo.id, selectedLessonId);
         if (!loginInfo.id) return;
         void (async () => {
             try {
                 const lessonListResponse = await fetchData<LessonListModel>(`/groups/${loginInfo.groupName}/lessons`, 'GET');
                 setLessonList(lessonListResponse);
-                setSelectedLessonId(lessonList?.allLessons[0].lessonId ?? 0);
             } catch (e) {
                 console.error(e);
             }
@@ -44,6 +42,11 @@ const MainPage: FC<Props> = ({ loginInfo }) => {
     }, [loginInfo]);
     
     useEffect(() => {
+        setSelectedLessonId(lessonList?.allLessons[0].lessonId ?? 0);
+    }, [lessonList]);
+    
+    useEffect(() => {
+        console.log(selectedLessonId);
         if (!loginInfo.id || !selectedLessonId) return;
         void (async () => {
             try {
@@ -59,14 +62,17 @@ const MainPage: FC<Props> = ({ loginInfo }) => {
         <div className={S['container']}>
             <TalkBox loginInfo={loginInfo} />
             <TodaysProblem loginInfo={loginInfo}
-                problems={model[Object.keys(model)[0]].problems}
+                // @ts-ignore
+                problems={model.studentInfo[Object.keys(model[Object.keys(model)[0]])[0]].todayProblems}
             />
             <TodaysState loginInfo={loginInfo}
-                states={model}
+                states={model.studentInfo}
             />
             <ProgressBar loginInfo={loginInfo}
-                solved={model[Object.keys(model)[0]].solved}
-                unsolved={model[Object.keys(model)[0]].unsolved}
+                // @ts-ignore
+                solved={model.studentInfo[Object.keys(model[Object.keys(model)[0]])[0]].solvedProblems}
+                // @ts-ignore
+                unsolved={model.studentInfo[Object.keys(model[Object.keys(model)[0]])[0]].unsolvedProblems}
             />
         </div>
     );

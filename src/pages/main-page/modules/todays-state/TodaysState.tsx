@@ -10,7 +10,7 @@ import type {FC, MouseEventHandler} from "react";
 
 interface Props {
     loginInfo: LoginInfo;
-    states: MainPageModel;
+    states: MainPageModel['studentInfo'];
 }
 
 function distinctFire(s: string, f: boolean) {
@@ -33,15 +33,17 @@ const AbsentButton: FC<AbsentButtonProps> = ({ onClick }) => {
 };
 
 const TodaysState: FC<Props> = ({ loginInfo, states }) => {
-    const [zzStates, setZzStates] = useState(states);
+    const [zzStates, setZzStates] = useState<MainPageModel['studentInfo']>(states);
     
-    useEffect(() => {
+    useEffect(/**/() => {
         setZzStates(states);
     }, [states]);
+    
     const handleAttendance = (i: number) => {
         if (loginInfo.type !== 'teacher') return;
         setZzStates((prev) => {
             const _prev = { ...prev };
+            // @ts-ignore
             _prev[Object.keys(prev)[i]].isAttendance = true;
             return _prev;
         });
@@ -55,14 +57,17 @@ const TodaysState: FC<Props> = ({ loginInfo, states }) => {
                     return (
                         <div key={i} className={'mb-4'}>
                             <div className={S['name-wrapper']}>
+                                {/*// @ts-ignore*/}
                                 <span>{distinctFire(`${d} | ${zzStates[d].bojId}`, zzStates[d].isFire)}</span>
+                                {/*// @ts-ignore*/}
                                 {zzStates[d].isAttendance ? <AttendanceButton /> : <AbsentButton onClick={() => handleAttendance(i)} />}
                             </div>
                             <div className={S['gray-box']}>
                                 <div className={'mb-4'}>
                                     <p className={'bold mb-1'}>Solved</p>
                                     <div className={S['prob-list']}>
-                                        {zzStates[d].solved.map((d2, i2) => {
+                                        {/*// @ts-ignore*/}
+                                        {zzStates[d].solvedProblems.map((d2, i2) => {
                                             return (
                                                 <a href={`${BOJ_HOME}${d2}`} key={i2} target={'_blank'} rel="noreferrer">
                                                     <div className={S['probs-solved']}>{d2}</div>
@@ -73,7 +78,8 @@ const TodaysState: FC<Props> = ({ loginInfo, states }) => {
                                 </div>
                                 <p className={'bold mb-1'}>Unsolved</p>
                                 <div className={S['prob-list']}>
-                                    {zzStates[d].solved.map((d2, i2) => {
+                                    {/*// @ts-ignore*/}
+                                    {zzStates[d].unsolvedProblems.map((d2, i2) => {
                                         return (
                                             <a href={`${BOJ_HOME}${d2}`} key={i2} target={'_blank'} rel="noreferrer">
                                                 <div className={S['probs-unsolved']}>{d2}</div>

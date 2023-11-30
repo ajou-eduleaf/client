@@ -1,13 +1,15 @@
 interface MainPageModel {
-	[id: string]: {
-		name: string,
-		bojId: string,
-		problems: number[],
-		solved: number[],
-		unsolved: number[],
-		isFire: boolean,
-		isAttendance: boolean,
-		groupName: string
+	studentInfo: {
+		[id: string]: {
+			name: string,
+			bojId: string,
+			todayProblems: number[],
+			solvedProblems: number[],
+			unsolvedProblems: number[],
+			isFire: boolean,
+			isAttendance: boolean,
+			groupName: string
+		}
 	}
 }
 

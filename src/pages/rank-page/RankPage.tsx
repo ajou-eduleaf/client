@@ -41,14 +41,13 @@ const RankPage: FC<Props> = ({ loginInfo }) => {
         if (!loginInfo.id) return;
         try {
             void (async () => {
-                const res = await fetchData<RankPageModel>(`/rank/show?type=${selectedRank}&academyName=${loginInfo.academyName}`, 'GET');
+                const res = await fetchData<RankPageModel>(`/rank/show?type=${selectedRank}&location=${loginInfo.academyName}`, 'GET');
                 setRankPageModel(res);
             })();
         } catch (e) {
             console.error(e);
         }
-        
-    }, [loginInfo]);
+    }, [selectedRank, loginInfo]);
     
     return (
         <div className={S['container']}>

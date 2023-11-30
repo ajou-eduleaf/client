@@ -30,7 +30,7 @@ const TodaysProblem: FC<Props> = ({ loginInfo, problems }) => {
             </div>
             <div className={S['prob-area']}>
                 {
-                    problems.map((d, i) => {
+                    problems && problems.map((d, i) => {
                         return (
                             <a href={`https://www.acmicpc.net/problem/${d}`} key={i} target={'_blank'} rel="noreferrer">
                                 <div className={S['probs']} >
