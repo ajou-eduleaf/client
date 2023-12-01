@@ -1,22 +1,31 @@
 
+import { useEffect, useState} from "react";
+
 import {fetchData} from "../../../../utils/api";
 
 import S from './TodaysProblem.module.css';
 
 import type {LoginInfo} from "../../../../config/type";
-import type {FC} from "react";
+import type {FC,Dispatch, SetStateAction} from "react";
 
 interface Props {
 	loginInfo: LoginInfo;
     problems: number[];
     selectedLessonId: number;
+    setRefresh: Dispatch<SetStateAction<boolean>>;
 }
 
-const TodaysProblem: FC<Props> = ({ loginInfo, problems, selectedLessonId }) => {
+const TodaysProblem: FC<Props> = ({ loginInfo, problems, selectedLessonId, setRefresh}) => {
     if (loginInfo.type === 'parents') return <></>;
     
+    const [zzProblems, setZzProblems] = useState<number[]>([]);
+    
+    useEffect(() => {
+        setZzProblems(problems);
+    }, [problems]);
+    
     const handleClickRefresh = () => {
-        // TODO
+        setRefresh(true);
     };
     
     const handleAddProbs = () => {
@@ -27,7 +36,16 @@ const TodaysProblem: FC<Props> = ({ loginInfo, problems, selectedLessonId }) => 
         }
         
         void (async () => {
-            await fetchData(`/lessons/${selectedLessonId}/register/problem/${probNumToAdd}`, 'PUT');
+            try {
+                setZzProblems((prev) => {
+                    const _prev = [...prev];
+                    _prev.push(probNumToAdd);
+                    return _prev;
+                });
+                await fetchData(`/lessons/${selectedLessonId}/register/problem/${probNumToAdd}`, 'PUT');
+            } catch (e) {
+                console.error(e);
+            }
         })();
     };
 	
@@ -40,7 +58,7 @@ const TodaysProblem: FC<Props> = ({ loginInfo, problems, selectedLessonId }) => 
             </div>
             <div className={S['prob-area']}>
                 {
-                    problems && problems.map((d, i) => {
+                    zzProblems && zzProblems.map((d, i) => {
                         return (
                             <a href={`https://www.acmicpc.net/problem/${d}`} key={i} target={'_blank'} rel="noreferrer">
                                 <div className={S['probs']} >
