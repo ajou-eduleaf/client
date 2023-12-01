@@ -31,15 +31,13 @@ const MainPage: FC<Props> = ({ loginInfo }) => {
     const [refresh, setRefresh] = useState<boolean>(false);
     
     useEffect(() => {
-        if (!refresh) return;
+        if (!refresh || !loginInfo.id || !selectedLessonId) return;
         void (async () => {
             try {
-                const lessonListResponse = await fetchData<LessonListModel>(`/groups/${loginInfo.groupName}/lessons`, 'GET');
-                setLessonList(lessonListResponse);
+                const response = await fetchData<MainPageModel>(`/lessons/${selectedLessonId}/info?type=${loginInfo.type}&id=${loginInfo.id}`, 'GET');
+                setModel(response);
             } catch (e) {
                 console.error(e);
-            } finally {
-                setRefresh(false);
             }
         })();
     }, [refresh]);
@@ -61,7 +59,6 @@ const MainPage: FC<Props> = ({ loginInfo }) => {
     }, [lessonList]);
     
     useEffect(() => {
-        console.log(selectedLessonId);
         if (!loginInfo.id || !selectedLessonId) return;
         void (async () => {
             try {

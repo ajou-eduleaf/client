@@ -70,7 +70,7 @@ const SignupPage: FC = () => {
     const handleSignup = () => {
         void (async () => {
             try {
-                const response = await fetchData<LoginInfo>(`/users/signup/student?name=${account.name}&studentId=${account.id}&studentPw=${account.pw}&academyName=${account.academyName}&groupName=${account.group}&age=${account.age}&bojId=${account.bojId}`, 'POST');
+                await fetchData<LoginInfo>(`/users/signup/student?name=${account.name}&studentId=${account.id}&studentPw=${account.pw}&academyName=${account.academyName}&groupName=${account.group}&age=${account.age}&bojId=${account.bojId}`, 'POST');
                 navigate(AppRoute.LOGIN);
             } catch (e) {
                 console.error(e);
@@ -80,7 +80,7 @@ const SignupPage: FC = () => {
     
     return (
         <div className={S['container']}>
-            <span className={'mb-4'}>회원가입</span>
+            <span className={'mb-4'}><b className={'bold'}>회원가입</b></span>
             <input onChange={handleChangeName} placeholder={'이름을 입력해주세요.'} />
             <input onChange={handleChangeId} placeholder={'아이디를 입력해주세요.'} />
             <input onChange={handleChangePw} placeholder={'비밀번호를 입력해주세요.'} type={'password'} />
