@@ -19,12 +19,13 @@ function App() {
     const navigate = useNavigate();
     
     useEffect(() => {
+        if (!login) navigate(AppRoute.LOGIN);
         if (login) navigate(AppRoute.MAIN);
     }, [login]);
     
     useEffect(() => {
-        setLogin(true);
-        setLoginInfo(TEACHER_DUMMY);
+        // setLogin(true);
+        // setLoginInfo(TEACHER_DUMMY);
     }, []);
     
     return (

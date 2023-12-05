@@ -44,7 +44,7 @@ const LoginPage: FC<props> = ({ setLogin, setLoginInfo }) => {
     };
     
     const handleGotoSignup = () => {
-        navigate(AppRoute.MAIN);
+        navigate(AppRoute.SIGNUP);
     };
     const handleLogin = () => {
         void (async () => {

@@ -28,6 +28,19 @@ const MainPage: FC<Props> = ({ loginInfo }) => {
             groupName: '',
         }
     }});
+    const [refresh, setRefresh] = useState<boolean>(false);
+    
+    useEffect(() => {
+        if (!refresh || !loginInfo.id || !selectedLessonId) return;
+        void (async () => {
+            try {
+                const response = await fetchData<MainPageModel>(`/lessons/${selectedLessonId}/info?type=${loginInfo.type}&id=${loginInfo.id}`, 'GET');
+                setModel(response);
+            } catch (e) {
+                console.error(e);
+            }
+        })();
+    }, [refresh]);
     
     useEffect(() => {
         if (!loginInfo.id) return;
@@ -46,7 +59,6 @@ const MainPage: FC<Props> = ({ loginInfo }) => {
     }, [lessonList]);
     
     useEffect(() => {
-        console.log(selectedLessonId);
         if (!loginInfo.id || !selectedLessonId) return;
         void (async () => {
             try {
@@ -65,6 +77,7 @@ const MainPage: FC<Props> = ({ loginInfo }) => {
                 // @ts-ignore
                 problems={model.studentInfo[Object.keys(model[Object.keys(model)[0]])[0]].todayProblems}
                 selectedLessonId={selectedLessonId}
+                setRefresh={setRefresh}
             />
             <TodaysState loginInfo={loginInfo}
                 states={model.studentInfo}
