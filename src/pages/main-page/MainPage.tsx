@@ -34,10 +34,13 @@ const MainPage: FC<Props> = ({ loginInfo }) => {
         if (!refresh || !loginInfo.id || !selectedLessonId) return;
         void (async () => {
             try {
+                await fetchData<MainPageModel>(`/lessons/${selectedLessonId}/refresh`, 'POST');
                 const response = await fetchData<MainPageModel>(`/lessons/${selectedLessonId}/info?type=${loginInfo.type}&id=${loginInfo.id}`, 'GET');
                 setModel(response);
             } catch (e) {
                 console.error(e);
+            } finally {
+                setRefresh(false);
             }
         })();
     }, [refresh]);

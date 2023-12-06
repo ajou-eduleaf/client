@@ -9,12 +9,13 @@ import {TEACHER_DUMMY} from "./pages/login-page/config/dummy";
 import LoginPage from "./pages/login-page/LoginPage";
 import MainPage from "./pages/main-page/MainPage";
 import RankPage from "./pages/rank-page/RankPage";
+import SettingPage from "./pages/setting-page/SettingPage";
 import SignupPage from "./pages/signup-page/SignupPage";
 
 import type {LoginInfo} from "./config/type";
 
 function App() {
-    const [login, setLogin] = useState(false);
+    const [login, setLogin] = useState<boolean>(false);
     const [loginInfo, setLoginInfo] = useState<LoginInfo>({id: '', name: '', type: 'parents', academyName: '', groupName: ''});
     const navigate = useNavigate();
     
@@ -36,6 +37,7 @@ function App() {
                 <Route path={AppRoute.SIGNUP} element={<SignupPage />} />
                 <Route path={AppRoute.MAIN} element={<MainPage loginInfo={loginInfo} />} />
                 <Route path={AppRoute.RANK} element={<RankPage loginInfo={loginInfo} />} />
+                <Route path={AppRoute.SETTING} element={<SettingPage setLogin={setLogin} setLoginInfo={setLoginInfo} />} />
             </Routes>
         </div>
     );

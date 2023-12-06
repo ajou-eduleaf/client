@@ -71,7 +71,7 @@ const Menus = () => (
         <Link to={AppRoute.RANK}>
             <span>🏆 Ranking</span>
         </Link>
-        <Link to={AppRoute.MAIN}>
+        <Link to={AppRoute.SETTING}>
             <span>⚙️ Settings</span>
         </Link>
         <a href={'https://www.acmicpc.net/'} target={'_blank'} rel="noreferrer">
