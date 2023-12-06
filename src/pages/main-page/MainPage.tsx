@@ -4,6 +4,7 @@ import {fetchData} from "../../utils/api";
 
 import S from "./MainPage.module.css";
 import ProgressBar from "./modules/progress-bar/ProgressBar";
+import SelectLesson from "./modules/select-lesson/SelectLesson";
 import TalkBox from "./modules/talk-box/TalkBox";
 import TodaysProblem from "./modules/todays-problem/TodaysProblem";
 import TodaysState from "./modules/todays-state/TodaysState";
@@ -76,6 +77,7 @@ const MainPage: FC<Props> = ({ loginInfo }) => {
     return (
         <div className={S['container']}>
             <TalkBox loginInfo={loginInfo} />
+            <SelectLesson selectedLessonId={selectedLessonId} setSelectedLessonId={setSelectedLessonId} lessonList={lessonList} />
             <TodaysProblem loginInfo={loginInfo}
                 // @ts-ignore
                 problems={model.studentInfo[Object.keys(model[Object.keys(model)[0]])[0]].todayProblems}
