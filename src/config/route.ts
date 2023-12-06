@@ -2,7 +2,8 @@ const AppRoute = {
     LOGIN: '/login',
     MAIN: '/',
     RANK: '/rank',
-    SIGNUP: '/signup'
+    SIGNUP: '/signup',
+    SETTING: '/setting'
 };
 
 export default AppRoute;

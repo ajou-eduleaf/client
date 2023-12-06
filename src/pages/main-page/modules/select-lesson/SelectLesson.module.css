@@ -1,0 +1,16 @@
+.container {
+    margin-bottom: 32px;
+}
+
+.container h1 {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.container select {
+    border: 1px solid var(--gray-2);
+    width: 128px;
+    height: 36px;
+    padding: 8px;
+}
