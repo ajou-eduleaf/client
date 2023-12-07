@@ -74,7 +74,7 @@ const RankPage: FC<Props> = ({ loginInfo }) => {
                     <tr key={i}>
                         <td>{`${i+1}${medalMaker(i+1)}`}</td>
                         <td>{d.bojId}</td>
-                        <td>128</td>
+                        <td>{d.solved}</td>
                     </tr>
                 ))}
             </table>

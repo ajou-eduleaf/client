@@ -80,7 +80,7 @@ const TodaysState: FC<Props> = ({ loginInfo, states, selectedLessonId }) => {
                                         {/*// @ts-ignore*/}
                                         {zzStates[d].solvedProblems.map((d2, i2) => {
                                             return (
-                                                <a href={`${BOJ_HOME}${d2}`} key={i2} target={'_blank'} rel="noreferrer">
+                                                <a href={`${BOJ_HOME}/problem/${d2}`} key={i2} target={'_blank'} rel="noreferrer">
                                                     <div className={S['probs-solved']}>{d2}</div>
                                                 </a>
                                             );
@@ -92,7 +92,7 @@ const TodaysState: FC<Props> = ({ loginInfo, states, selectedLessonId }) => {
                                     {/*// @ts-ignore*/}
                                     {zzStates[d].unsolvedProblems.map((d2, i2) => {
                                         return (
-                                            <a href={`${BOJ_HOME}${d2}`} key={i2} target={'_blank'} rel="noreferrer">
+                                            <a href={`${BOJ_HOME}/problem/${d2}`} key={i2} target={'_blank'} rel="noreferrer">
                                                 <div className={S['probs-unsolved']}>{d2}</div>
                                             </a>
                                         );
